@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Posts",
+    "description": "http://jsonplaceholder.typicode.com/posts",
+    "type": "object",
+    "properties": {
+	    "userId": {
+				"type": "integer"
+			},
+	    "id": {
+				"type": "integer"
+			},
+	    "title": {
+				"type": "string"
+			},
+	    "body": {
+				"type": "string"
+			}
+	},
+    "required": ["userID", "id", "title","body"]
+  }

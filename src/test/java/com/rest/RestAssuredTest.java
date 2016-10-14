@@ -3,6 +3,7 @@ package com.rest;
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import io.restassured.response.ResponseBody;
 
 
@@ -59,7 +60,7 @@ public class RestAssuredTest {
 	    body(userIdField,equalTo(new Long(userId).intValue()),
 	    		idField, equalTo(new Long(id).intValue()),
 	    		titleField, equalTo(title),
-	    		bodyField,equalTo(body));
+	    		bodyField,equalTo(body)).and().body(matchesJsonSchemaInClasspath("posts-schema.json"));
 	}
 	
 	@Then("^Test the Put Rest method by Response Body as String\\.$")
@@ -90,7 +91,7 @@ public class RestAssuredTest {
 	    body(userIdField,equalTo(new Long(userId).intValue()),
 	    		idField, equalTo(new Long(id).intValue()),
 	    		titleField, equalTo(title),
-	    		bodyField,equalTo(body));
+	    		bodyField,equalTo(body)).and().body(matchesJsonSchemaInClasspath("posts-schema.json"));
 	}
 	
 }
