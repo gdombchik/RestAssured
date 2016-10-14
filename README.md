@@ -1,1 +1,1 @@
-REST-assured / Java Cucumber / Maven / JUnit / 
+REST-assured / Java Cucumber / Maven / JUnit / GSON
