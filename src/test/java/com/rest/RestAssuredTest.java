@@ -6,22 +6,27 @@ import static org.hamcrest.Matchers.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import io.restassured.response.ResponseBody;
 
-
 import java.util.List;
+
+import org.junit.Assert;
 
 import com.test.rest.dto.PostsDto;
 
 import cucumber.api.DataTable;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+
 
 
 //http://www.hascode.com/2011/10/testing-restful-web-services-made-easy-using-the-rest-assured-framework/
 //http://testdetective.com/rest-assured-going-deeper/
 //http://www.restapitutorial.com/httpstatuscodes.html
 public class RestAssuredTest {
+	
+	private static String REST_POST_BY_OBJECT_MAPPING = "object_mapping";
+	private static String REST_POST_BY_VALUE = "value";
 		
-	@When("^Test the Get Rest method\\.$")
+	@Given("^Test the Get Rest method\\.$")
 	public void testTheGetmethod(DataTable table) throws Throwable {
 		List<List<String>> tableList = table.raw();
 		String url = tableList.get(1).get(1);
@@ -93,5 +98,16 @@ public class RestAssuredTest {
 	    		titleField, equalTo(title),
 	    		bodyField,equalTo(body)).and().body(matchesJsonSchemaInClasspath("posts-schema.json"));
 	}
+
+
+	@Given("^Post Rest Request by ([^\"]*)$")
+	public void post_Rest_Request_by_Object_Mapping(String value, DataTable arg1) throws Throwable {
+		 if(value.equals(this.REST_POST_BY_OBJECT_MAPPING)){
+			 System.out.println(value);
+		 }else if (value.equals(this.REST_POST_BY_OBJECT_MAPPING)){
+			 System.out.println(value);
+		 }
+	}
+
 	
 }
