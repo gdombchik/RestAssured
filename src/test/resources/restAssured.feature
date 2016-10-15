@@ -7,22 +7,6 @@ Scenario:  Test the REST methods.
   | url  | http://jsonplaceholder.typicode.com/ |
   | resource  | users/ |
   | id  | 1 |
-  Then Test the Put Rest method by Object Mapping.
-	| Field | Value |
-  | url  | http://jsonplaceholder.typicode.com/ |
-  | resource  | posts/ |
-  | userID  | 1 |
-  | id  | 101 |
-  | title  | new title |
-  | body  | new body |
-  Then Test the Put Rest method by Response Body as String.
-	| Field | Value |
-  | url  | http://jsonplaceholder.typicode.com/ |
-  | resource  | posts/ |
-  | userID  | 1 |
-  | id  | 101 |
-  | title  | new title |
-  | body  | new body |
   
  @restAssuredScenarioOutline
     Scenario Outline: Post Rest Request
@@ -34,6 +18,8 @@ Scenario:  Test the REST methods.
 	  | id  | 101 |
 	  | title  | new title |
 	  | body  | new body |
+	  | content type  | application/json |
+	  | json schema  | posts-schema.json |
 
     # Post Rest Request by Object Mapping or JSON String
     Examples: 
