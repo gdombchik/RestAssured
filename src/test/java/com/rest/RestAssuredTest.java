@@ -4,17 +4,14 @@ import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
-import io.restassured.response.ResponseBody;
 
 import java.util.List;
-
-import org.junit.Assert;
+import java.util.Map;
 
 import com.test.rest.dto.PostsDto;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 
 //http://www.hascode.com/2011/10/testing-restful-web-services-made-easy-using-the-rest-assured-framework/
 //http://testdetective.com/rest-assured-going-deeper/
@@ -26,11 +23,12 @@ public class RestAssuredTest {
 
 	@Given("^Test the Get REST method\\.$")
 	public void testTheGetRESTMethod(DataTable table) throws Throwable {
-		List<List<String>> tableList = table.raw();
-		String url = tableList.get(1).get(1);
-		String resource = tableList.get(2).get(1);
-		String id = tableList.get(3).get(1);
-		String idField = tableList.get(3).get(0);
+		Map<String,String> data = table.asMap(String.class,String.class);
+		String url = data.get("url");
+		String resource = data.get("resource");
+		String idField = table.raw().get(3).get(0); //id (first column)
+		String id = data.get(idField);
+				
 		// HTTP Status Code: 200 OK
 		get(url + resource + id).then().statusCode(200)
 				.body(idField, equalTo(new Long(id).intValue()));
@@ -39,19 +37,19 @@ public class RestAssuredTest {
 	@Given("^Test the Post REST method by ([^\"]*)$")
 	public void testThePostRESTMethodBy(String value,
 			DataTable table) throws Throwable {
-		List<List<String>> tableList = table.raw();
-		String url = tableList.get(1).get(1);
-		String resource = tableList.get(2).get(1);
-		String userIdField = tableList.get(3).get(0);
-		String userId = tableList.get(3).get(1);
-		String idField = tableList.get(4).get(0);
-		String id = tableList.get(4).get(1);
-		String titleField = tableList.get(5).get(0);
-		String title = tableList.get(5).get(1);
-		String bodyField = tableList.get(6).get(0);
-		String body = tableList.get(6).get(1);
-		String contentType = tableList.get(7).get(1);
-		String jsonSchema = tableList.get(8).get(1);
+		Map<String,String> data = table.asMap(String.class,String.class);
+		String url = data.get("url");
+		String resource = data.get("resource"); 
+		String userIdField = table.raw().get(3).get(0);
+		String userId = data.get(userIdField);
+		String idField = table.raw().get(4).get(0);
+		String id =  data.get(idField);
+		String titleField = table.raw().get(5).get(0);
+		String title = data.get(titleField);
+		String bodyField = table.raw().get(6).get(0);
+		String body = data.get(bodyField);
+		String contentType = data.get("content type");
+		String jsonSchema = data.get("json schema");
 
 		if (value.equals(RestAssuredTest.REST_POST_BY_OBJECT_MAPPING)) {
 			PostsDto postsDto = new PostsDto(userId, id, title, body);
@@ -103,19 +101,19 @@ public class RestAssuredTest {
 	
 	@Given("^Test the Put REST method\\.$")
 	public void testThePutRESTMethod(DataTable table) throws Throwable {
-		List<List<String>> tableList = table.raw();
-		String url = tableList.get(1).get(1);
-		String resource = tableList.get(2).get(1);
-		String userIdField = tableList.get(3).get(0);
-		String userId = tableList.get(3).get(1);
-		String idField = tableList.get(4).get(0);
-		String id = tableList.get(4).get(1);
-		String titleField = tableList.get(5).get(0);
-		String title = tableList.get(5).get(1);
-		String bodyField = tableList.get(6).get(0);
-		String body = tableList.get(6).get(1);
-		String contentType = tableList.get(7).get(1);
-		String jsonSchema = tableList.get(8).get(1);
+		Map<String,String> data = table.asMap(String.class,String.class);
+		String url = data.get("url");
+		String resource = data.get("resource"); 
+		String userIdField = table.raw().get(3).get(0);
+		String userId = data.get(userIdField);
+		String idField = table.raw().get(4).get(0);
+		String id =  data.get(idField);
+		String titleField = table.raw().get(5).get(0);
+		String title = data.get(titleField);
+		String bodyField = table.raw().get(6).get(0);
+		String body = data.get(bodyField);
+		String contentType = data.get("content type");
+		String jsonSchema = data.get("json schema");
 		
 		PostsDto postsDto = new PostsDto(userId, id, title, body);
 		
@@ -135,11 +133,12 @@ public class RestAssuredTest {
 	
 	@Given("^Test the Delete REST method\\.$")
 	public void testTheDeleteRESTMethod(DataTable table) throws Throwable {
-		List<List<String>> tableList = table.raw();
-		String url = tableList.get(1).get(1);
-		String resource = tableList.get(2).get(1);
-		String id = tableList.get(3).get(1);
-		String contentType = tableList.get(4).get(1);
+		Map<String,String> data = table.asMap(String.class,String.class);
+		String url = data.get("url");
+		String resource = data.get("resource");
+		String idField = table.raw().get(3).get(0);
+		String id =  data.get(idField);
+		String contentType = data.get("content type");
 		
 		// HTTP Status Code: 200 OK
 		given()
