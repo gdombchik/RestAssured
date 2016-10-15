@@ -132,5 +132,21 @@ public class RestAssuredTest {
 						equalTo(title), bodyField, equalTo(body)).and()
 				.body(matchesJsonSchemaInClasspath(jsonSchema));
 	}
-
+	
+	@Given("^Test the Delete REST method\\.$")
+	public void testTheDeleteRESTMethod(DataTable table) throws Throwable {
+		List<List<String>> tableList = table.raw();
+		String url = tableList.get(1).get(1);
+		String resource = tableList.get(2).get(1);
+		String id = tableList.get(3).get(1);
+		String contentType = tableList.get(4).get(1);
+		
+		// HTTP Status Code: 200 OK
+		given()
+		.contentType(contentType)
+				.when()
+				.delete(url + resource + id) //http://jsonplaceholder.typicode.com/posts/1
+				.then()
+				.statusCode(200);
+	}
 }
