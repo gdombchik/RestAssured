@@ -1,16 +1,16 @@
 Feature:  To test the JSONPlaceholder REST API using RestAssured.
 
-@restAssured
-Scenario:  Test the REST methods.
-	Given Test the Get Rest method.
+@getRequest
+Scenario:  Test the Get REST method.
+	Given Test the Get REST method.
 	| Field | Value |
   | url  | http://jsonplaceholder.typicode.com/ |
   | resource  | users/ |
   | id  | 1 |
   
- @restAssuredScenarioOutline
-    Scenario Outline: Post Rest Request
-    Given Post Rest Request by <value>
+ @postRequest
+ Scenario Outline: Test the Post REST method.
+    Given Test the Post REST method by <value>
     | Field | Value |
 	  | url  | http://jsonplaceholder.typicode.com/ |
 	  | resource  | posts/ |
@@ -21,7 +21,7 @@ Scenario:  Test the REST methods.
 	  | content type  | application/json |
 	  | json schema  | posts-schema.json |
 
-    # Post Rest Request by Object Mapping or JSON String
+    # Post REST Request by Object Mapping or JSON String
     Examples: 
       | value |
       | Object Mapping |

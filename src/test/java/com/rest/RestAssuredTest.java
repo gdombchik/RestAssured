@@ -24,8 +24,8 @@ public class RestAssuredTest {
 	private static String REST_POST_BY_OBJECT_MAPPING = "Object Mapping";
 	private static String REST_POST_BY_VALUE = "JSON String";
 
-	@Given("^Test the Get Rest method\\.$")
-	public void testTheGetmethod(DataTable table) throws Throwable {
+	@Given("^Test the Get REST method\\.$")
+	public void testTheGetRESTMethod(DataTable table) throws Throwable {
 		List<List<String>> tableList = table.raw();
 		String url = tableList.get(1).get(1);
 		String resource = tableList.get(2).get(1);
@@ -36,8 +36,8 @@ public class RestAssuredTest {
 				.body(idField, equalTo(new Long(id).intValue()));
 	}
 
-	@Given("^Post Rest Request by ([^\"]*)$")
-	public void postRestRequestBy(String value,
+	@Given("^Test the Post REST method by ([^\"]*)$")
+	public void testThePostRESTMethodBy(String value,
 			DataTable table) throws Throwable {
 		List<List<String>> tableList = table.raw();
 		String url = tableList.get(1).get(1);
