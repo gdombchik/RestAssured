@@ -26,3 +26,16 @@ Scenario:  Test the Get REST method.
       | value |
       | Object Mapping |
       | JSON String |
+      
+@putRequest
+Scenario:  Test the Put REST method.
+	Given Test the Put REST method.
+	  | Field | Value |
+	  | url  | http://jsonplaceholder.typicode.com/ |
+	  | resource  | posts/ |
+	  | userID  | 1 |
+	  | id  | 1 |
+	  | title  | new title |
+	  | body  | new body |
+	  | content type  | application/json |
+	  | json schema  | posts-schema.json |

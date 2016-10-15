@@ -100,4 +100,37 @@ public class RestAssuredTest {
 					.body(matchesJsonSchemaInClasspath(jsonSchema));
 		}
 	}
+	
+	@Given("^Test the Put REST method\\.$")
+	public void testThePutRESTMethod(DataTable table) throws Throwable {
+		List<List<String>> tableList = table.raw();
+		String url = tableList.get(1).get(1);
+		String resource = tableList.get(2).get(1);
+		String userIdField = tableList.get(3).get(0);
+		String userId = tableList.get(3).get(1);
+		String idField = tableList.get(4).get(0);
+		String id = tableList.get(4).get(1);
+		String titleField = tableList.get(5).get(0);
+		String title = tableList.get(5).get(1);
+		String bodyField = tableList.get(6).get(0);
+		String body = tableList.get(6).get(1);
+		String contentType = tableList.get(7).get(1);
+		String jsonSchema = tableList.get(8).get(1);
+		
+		PostsDto postsDto = new PostsDto(userId, id, title, body);
+		
+		// HTTP Status Code: 200 OK
+		given()
+		.contentType(contentType)
+				.body(postsDto)
+				.when()
+				.put(url + resource + id) //http://jsonplaceholder.typicode.com/posts/1
+				.then()
+				.statusCode(200)
+				.body(userIdField, equalTo(new Long(userId).intValue()),
+						idField, equalTo(new Long(id).intValue()), titleField,
+						equalTo(title), bodyField, equalTo(body)).and()
+				.body(matchesJsonSchemaInClasspath(jsonSchema));
+	}
+
 }
