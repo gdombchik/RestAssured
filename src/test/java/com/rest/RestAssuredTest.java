@@ -13,9 +13,6 @@ import com.test.rest.dto.PostsDto;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 
-//http://www.hascode.com/2011/10/testing-restful-web-services-made-easy-using-the-rest-assured-framework/
-//http://testdetective.com/rest-assured-going-deeper/
-//http://www.restapitutorial.com/httpstatuscodes.html
 public class RestAssuredTest {
 
 	private static String REST_POST_BY_OBJECT_MAPPING = "Object Mapping";
