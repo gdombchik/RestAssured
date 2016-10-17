@@ -5,7 +5,6 @@ import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
-import java.util.List;
 import java.util.Map;
 
 import com.test.rest.dto.PostsDto;
@@ -15,8 +14,8 @@ import cucumber.api.java.en.Given;
 
 public class RestAssuredTest {
 
-	private static String REST_POST_BY_OBJECT_MAPPING = "Object Mapping";
-	private static String REST_POST_BY_VALUE = "JSON String";
+	private static final String REST_POST_BY_OBJECT_MAPPING = "Object Mapping";
+	private static final String REST_POST_BY_VALUE = "JSON String";
 
 	@Given("^Test the Get REST method\\.$")
 	public void testTheGetRESTMethod(DataTable table) throws Throwable {
