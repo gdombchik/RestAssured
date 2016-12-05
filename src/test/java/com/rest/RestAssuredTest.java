@@ -159,6 +159,7 @@ public class RestAssuredTest {
 		PostsDto postsDto = new PostsDto(userId, id, title, body);
 		
 		// HTTP Status Code: 200 OK
+		// Put - Update/Replace
 		given()
 		.contentType(contentType)
 				.body(postsDto)
@@ -172,6 +173,40 @@ public class RestAssuredTest {
 				.body(matchesJsonSchemaInClasspath(jsonSchema));
 	}
 	
+	@Given("^Test the Patch REST method\\.$")
+	public void test_the_Patch_REST_method(DataTable table) throws Throwable {
+		Map<String,String> data = table.asMap(String.class,String.class);
+		String url = data.get("url");
+		String resource = data.get("resource"); 
+		String userIdField = table.raw().get(3).get(0);
+		String userId = data.get(userIdField);
+		String idField = table.raw().get(4).get(0);
+		String id =  data.get(idField);
+		String titleField = table.raw().get(5).get(0);
+		String title = data.get(titleField);
+		String contentType = data.get("content type");
+				
+		StringBuilder jsonBody = new StringBuilder();
+		jsonBody.append("{")
+				.append("\"" + userIdField + "\":" + userId + ",")
+				.append("\"" + idField + "\":" + id + ",")
+				.append("\"" + titleField + "\":\"" + title + "\"")
+				.append("}");
+		
+		// HTTP Status Code: 200 OK
+		// Patch - Update/Modify
+		logger.trace(given()
+		.contentType(contentType)
+				.body(jsonBody.toString())
+				.when()
+				.patch(url + resource + id) //http://jsonplaceholder.typicode.com/posts/1
+				.then()
+				.statusCode(200)
+				.body(userIdField, equalTo(new Long(userId).intValue()),
+						idField, equalTo(new Long(id).intValue()), titleField,
+						equalTo(title)).log().body());
+	}
+
 	@Given("^Test the Delete REST method\\.$")
 	public void testTheDeleteRESTMethod(DataTable table) throws Throwable {
 		Map<String,String> data = table.asMap(String.class,String.class);

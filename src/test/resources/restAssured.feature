@@ -53,6 +53,18 @@ Feature: To test the JSONPlaceholder REST API using RestAssured.
       | body         | new body                             |
       | content type | application/json                     |
       | json schema  | posts-schema.json                    |
+      
+  #patch test -> do not update the body field    
+  @patchRequest
+  Scenario: Test the Patch REST method.
+    Given Test the Patch REST method.
+      | Field        | Value                                |
+      | url          | http://jsonplaceholder.typicode.com/ |
+      | resource     | posts/                               |
+      | userID       |                                    1 |
+      | id           |                                    1 |
+      | title        | new title                            |
+      | content type | application/json                     |    
 
   @deleteRequest
   Scenario: Test the Delete REST method.
